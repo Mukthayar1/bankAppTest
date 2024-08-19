@@ -1,6 +1,5 @@
 
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import CustomBottomTab from '../../components/CustomBottomTab/CustomBottomTab';
 import { Home, History } from '../../screens/userScreens';
 
 const UserRoute = () => {
@@ -8,7 +7,7 @@ const UserRoute = () => {
     const Tab = createBottomTabNavigator();
 
     return (
-        <Tab.Navigator tabBar={props => <CustomBottomTab {...props} />}>
+        <Tab.Navigator>
             <Tab.Group
                 screenOptions={{
                     headerShown: false,

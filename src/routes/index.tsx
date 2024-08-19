@@ -18,7 +18,7 @@ const MainRoutes: React.FC = () => {
 
     return (
         <NavigationContainer>
-            {userLogin ? <AuthRoutes /> : <UserRoute />}
+            {!userLogin ? <AuthRoutes /> : <UserRoute />}
         </NavigationContainer>
     );
 };
