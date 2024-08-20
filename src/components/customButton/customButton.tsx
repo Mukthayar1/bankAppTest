@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, StyleSheet, TouchableOpacity, Image } from 'react-native';
+import { Text, StyleSheet, TouchableOpacity, Image, ColorValue } from 'react-native';
 import Colors from '../../constants/colors';
 // import { ResponsiveFonts } from '../../constants/AppFonts';
 import { verticalScale } from '../../constants/dynamicSizes';
@@ -55,8 +55,8 @@ type Props = {
   code?: string;
   onPress: () => void,
   text?: string | null,
-  bgColor?: string,
-  fgColor?: string,
+  bgColor?: ColorValue,
+  fgColor?: ColorValue,
   width?: string,
   marginTop?: number,
   Icon?: string | object,

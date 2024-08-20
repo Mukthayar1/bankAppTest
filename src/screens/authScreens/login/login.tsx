@@ -1,20 +1,45 @@
 import React, { useState } from 'react';
 import { ScrollView, StyleSheet, TouchableOpacity, View, Text } from 'react-native';
+import { useDispatch } from 'react-redux';
+
 import Colors from '../../../constants/colors';
 import { ResponsiveFonts } from '../../../constants/appFonts';
 import { StatusBarHeight, verticalScale } from '../../../constants/dynamicSizes';
 import CustomButton from '../../../components/customButton/customButton';
 import CustomInput from '../../../components/customInput/customInput';
 import TextLabel from '../../../components/textLabel/textLabel';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { loginApi } from '../../../api/authApi/authServices';
+import { encryptVal } from '../../../constants/encryption';
+import { loginUser } from '../../../store/Reducer/userReducer';
 
-type LoginProps = {};
+const Login: React.FC = () => {
 
-const Login: React.FC<LoginProps> = () => {
+    const queryClient = useQueryClient();
+    const dispatch = useDispatch()
 
-    const [email, setEmail] = useState<String>();
-    const [password, setPassword] = useState<String>();
-    const [loading, setLoading] = useState<Boolean>();
-    const [viewPassword, setViewPassword] = useState<Boolean>();
+    const [email, setEmail] = useState<String>("demo@harvestapp.com");
+    const [password, setPassword] = useState<String>("HarvestTest#456");
+    const [viewPassword, setViewPassword] = useState<Boolean>(true);
+
+    const { mutateAsync: loginMutation, isError, isSuccess, isPending } = useMutation({
+        mutationFn: async (body: {}) => await loginApi(body),
+        onSuccess: (data) => {
+            const decryptData = encryptVal(JSON.stringify(data?.data));
+            dispatch(loginUser(decryptData))
+            queryClient.invalidateQueries({ queryKey: ["loginMutation"] });
+        },
+    })
+
+    const handleCreateAd = async (email: String, password: String) => {
+        const body = {
+            "email": email,
+            "password": password
+        }
+        await loginMutation(body);
+    }
+
+    console.log('isPending',isPending);
 
     return (
         <View style={styles.container}>
@@ -28,18 +53,17 @@ const Login: React.FC<LoginProps> = () => {
                         value={email}
                         keybord={'email-address'}
                         setValue={setEmail}
-                        width={'100%'}
-                    />
+                        editable={!isPending}
+                        width={'100%'} />
                     <CustomInput
                         placeholder={"Login pin"}
                         secureTextEntry={viewPassword}
                         secure={true}
+                        editable={!isPending}
                         value={password}
                         setValue={setPassword}
                         width={'100%'}
-                        marginTop={20}
-                        SetsecureTextEntry={() => setViewPassword(prevState => !prevState)}
-                    />
+                        SetsecureTextEntry={() => setViewPassword(prevState => !prevState)} />
 
                     <View style={styles.row}>
                         <TextLabel label={"Forgot pin? "} ResponsiveFonts={ResponsiveFonts.textualStyles.TextInputFonts} color={Colors.black} />
@@ -49,13 +73,14 @@ const Login: React.FC<LoginProps> = () => {
                     </View>
 
                     <CustomButton
-                        text={"Login"}
+                        text={isPending ? "Loading" : "Login"}
                         marginTop={20}
+                        disabled={isPending}
                         width='100%'
                         fgColor={Colors.white}
-                        onPress={() => { }}
+                        bgColor={!isPending ? Colors.theme : Colors.grey300}
+                        onPress={() => handleCreateAd(email, password)}
                     />
-
                     <View style={[styles.row, { alignSelf: "center" }]}>
                         <TextLabel label={"Don’t have an account? "} ResponsiveFonts={ResponsiveFonts.textualStyles.TextInputFonts} color={Colors.black} />
                         <TouchableOpacity>
@@ -77,7 +102,7 @@ const styles = StyleSheet.create({
         flex: 1,
     },
     loginBody: {
-        width: "95%",
+        width: "92%",
         alignSelf: "center",
     },
     row: {

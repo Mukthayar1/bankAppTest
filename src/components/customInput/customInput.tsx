@@ -118,7 +118,7 @@ type Props = {
   icon?: ImageSourcePropType;
   type?: String;
   SetsecureTextEntry?: SetStateAction<any>;
-  secure?: ImageSourcePropType;
+  secure?: Boolean;
   width?: Number | String;
   tintColor?: String;
   borderWidth?: Number | String;
