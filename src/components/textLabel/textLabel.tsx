@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, View } from 'react-native';
+import { ColorValue, Text, View } from 'react-native';
 
 import Colors from '../../constants/colors';
 import { moderateScale, textScale, verticalScale } from '../../constants/dynamicSizes';
@@ -56,7 +56,7 @@ export default TextLabel;
 
 type Props = {
   label?: String | null,
-  color?: string,
+  color?: ColorValue,
   marginTop?: number,
   marginLeft?: number | String,
   alignSelf?: string,
