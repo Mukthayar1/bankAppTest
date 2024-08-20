@@ -83,15 +83,15 @@ export const styles = StyleSheet.create({
         shadowRadius: 5,
     },
     bottomBar: {
-        shadowColor: "#000",
-        shadowOffset: {
-            width: 0,
-            height: 12,
-        },
-        shadowOpacity: 0.58,
-        shadowRadius: 16.00,
+        // shadowColor: "#000",
+        // shadowOffset: {
+        //     width: 0,
+        //     height: 12,
+        // },
+        // shadowOpacity: 0.58,
+        // shadowRadius: 16.00,
         
-        elevation: 100
+        // elevation: 100
     },
     btnCircleUp: {
         width: verticalScale(50),

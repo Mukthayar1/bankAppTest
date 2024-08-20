@@ -12,6 +12,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { loginApi } from '../../../api/authApi/authServices';
 import { encryptVal } from '../../../constants/encryption';
 import { loginUser } from '../../../store/Reducer/userReducer';
+import apiInstance from '../../../api/apiInstance';
 
 const Login: React.FC = () => {
 
@@ -38,8 +39,6 @@ const Login: React.FC = () => {
         }
         await loginMutation(body);
     }
-
-    console.log('isPending',isPending);
 
     return (
         <View style={styles.container}>
