@@ -45,8 +45,7 @@ const BottomTabs = () => {
                     </TouchableOpacity>
                 </Animated.View>
             )}
-            tabBar={renderTabBar}
-        >
+            tabBar={renderTabBar}>
             <CurvedBottomBarExpo.Screen
                 name="Home"
                 position="LEFT"
@@ -84,7 +83,15 @@ export const styles = StyleSheet.create({
         shadowRadius: 5,
     },
     bottomBar: {
-        borderRadius: 0,
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 12,
+        },
+        shadowOpacity: 0.58,
+        shadowRadius: 16.00,
+        
+        elevation: 100
     },
     btnCircleUp: {
         width: verticalScale(50),
