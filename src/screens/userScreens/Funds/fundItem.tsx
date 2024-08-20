@@ -1,15 +1,22 @@
 import React from 'react';
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import Colors from '../../../constants/colors';
 import CustomHeader from '../../../components/customHeader/customHeader';
+import { moderateScale, verticalScale } from '../../../constants/dynamicSizes';
 
-type FundItem = {}; // Define your prop types here if needed
+type FundItem = {};
 
-const FundItem: React.FC<FundItem> = ({ item }: { item: Fund }) => {
+const FundItem: React.FC<FundItem> = ({ item }) => {
+
+    console.log('item', item);
+
     return (
         <View style={styles.card}>
             <View style={styles.header}>
-                <Text style={styles.title}>{item.name}</Text>
+                <View>
+                    <Image source={require('../../../assets/dummyImages/bankImage.png')} resizeMode='contain' style={styles.bankImage} />
+                    <Text style={styles.title}>{item.name}</Text>
+                </View>
                 <View style={styles.returnContainer}>
                     <Text style={[styles.returnText, item.last_year_return > 0 ? styles.positiveReturn : styles.negativeReturn]}>
                         {item.last_year_return > 0 ? `↑ ${item.last_year_return}%` : `↓ ${item.last_year_return}%`}
@@ -41,6 +48,12 @@ const styles = StyleSheet.create({
         shadowOpacity: 0.1,
         shadowRadius: 8,
         elevation: 2,
+        width: "95%",
+        alignSelf: "center"
+    },
+    bankImage:{
+        height:verticalScale(30),
+        width:moderateScale(30)
     },
     header: {
         flexDirection: 'row',

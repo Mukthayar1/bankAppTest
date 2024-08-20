@@ -6,6 +6,8 @@ import Colors from '../../../constants/colors';
 import CustomHeader from '../../../components/customHeader/customHeader';
 import { getMutualFunds } from '../../../api/userApi/userServices';
 import FundItem from './fundItem';
+import { ResponsiveFonts } from '../../../constants/appFonts';
+import TextLabel from '../../../components/textLabel/textLabel';
 
 type FundsProps = {};
 
@@ -19,7 +21,14 @@ const Funds: React.FC<FundsProps> = () => {
     return (
         <View style={styles.container}>
             <CustomHeader label={"Mutual Funds"} back={true} />
+
+
             <FlatList
+                ListHeaderComponent={() => {
+                    return (<>
+                        {data?.data && <TextLabel label={`Total Funds ${data?.data?.length}`} marginTop={20}
+                            ResponsiveFonts={ResponsiveFonts.textualStyles.TextInputFonts} fontSize={14} marginLeft={15} marginBottom={10} />}</>)
+                }}
                 data={data?.data}
                 renderItem={FundItem}
                 keyExtractor={item => item.id.toString()}
