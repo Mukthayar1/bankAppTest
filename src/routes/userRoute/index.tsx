@@ -1,40 +1,26 @@
+import React from 'react';
+import { createNativeStackNavigator, NativeStackNavigationOptions } from '@react-navigation/native-stack';
+import BottomTabs from './BottomBar';
 
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { Home, History } from '../../screens/userScreens';
+type AuthStackParamList = {
+    BottomTabs: undefined;
+};
 
-const UserRoute = () => {
+const UserRoute: React.FC = () => {
 
-    const Tab = createBottomTabNavigator();
+    const Stack = createNativeStackNavigator<AuthStackParamList>();
+
+    const screenOptions: NativeStackNavigationOptions = {
+        headerShown: false,
+        animation: 'slide_from_bottom',
+        animationDuration: 500
+    };
 
     return (
-        <Tab.Navigator>
-            <Tab.Group
-                screenOptions={{
-                    headerShown: false,
-                }}>
-                <Tab.Screen
-                    options={{ tabBarLabel: 'Home' }}
-                    name="Home"
-                    component={Home}
-                />
-                <Tab.Screen
-                    options={{ tabBarLabel: 'Home2' }}
-                    name="Cart"
-                    component={Home}
-                />
-
-                <Tab.Screen
-                    options={{ tabBarLabel: 'History2' }}
-                    name="History"
-                    component={History}
-                />
-                <Tab.Screen
-                    options={{ tabBarLabel: 'History' }}
-                    name="History2"
-                    component={History}
-                />
-            </Tab.Group>
-        </Tab.Navigator>
+        <Stack.Navigator initialRouteName="BottomTabs" screenOptions={screenOptions}>
+            <Stack.Screen name="BottomTabs" component={BottomTabs} />
+        </Stack.Navigator>
     );
 };
+
 export default UserRoute;
