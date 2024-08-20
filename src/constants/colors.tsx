@@ -6,6 +6,7 @@ type ColorsType = {
     grey500: ColorValue;
     grey300: ColorValue;
     green25: ColorValue;
+    green700: ColorValue;
     red100: ColorValue;
     red: ColorValue;
     black: ColorValue;
@@ -19,6 +20,7 @@ const Colors: ColorsType = {
     grey500: "#667085",
     grey300: "#D0D5DD",
     green25: "#F6FEF9",
+    green700:"#027A48",
     red100: "#FFEBE6",
     red: "#cb4335",
     black: 'rgba(20,19,19,1)',

@@ -22,19 +22,21 @@ const CustomInput: FC<Props> = ({
   color,
   height,
   widthinput,
-  editable
+  editable,
+  width
 }) => {
 
 
   return (
-    <View>
-      <View style={[styles.container]}>
+      <View style={[styles.container,
+      width ? { width } : {},
+      ]}>
         {type == 'ICON' && icon && (
           <Image
             source={icon}
             style={[
               styles.img,
-              tintColor ? { tintColor } : { tintColor: Colors.grey300 },
+              tintColor ? { tintColor } : { tintColor: Colors.grey500 },
             ]}
             resizeMode={'contain'}
           />
@@ -67,7 +69,6 @@ const CustomInput: FC<Props> = ({
           </Pressable>
         )}
       </View>
-    </View>
   );
 };
 
