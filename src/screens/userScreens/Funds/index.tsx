@@ -3,17 +3,17 @@ import { StyleSheet, Text, View } from 'react-native';
 import Colors from '../../../constants/colors';
 import CustomHeader from '../../../components/customHeader/customHeader';
 
-type HistoryProps = {};
+type FundsProps = {}; // Define your prop types here if needed
 
-const History: React.FC<HistoryProps> = () => {
+const Funds: React.FC<FundsProps> = () => {
     return (
         <View style={styles.container}>
-           <CustomHeader label={"History"} back={true} />
+            <CustomHeader label={"Funds"} back={true} />
         </View>
     );
 };
 
-export default History;
+export default Funds;
 
 const styles = StyleSheet.create({
     container: {

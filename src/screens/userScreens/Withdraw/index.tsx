@@ -3,17 +3,17 @@ import { StyleSheet, Text, View } from 'react-native';
 import Colors from '../../../constants/colors';
 import CustomHeader from '../../../components/customHeader/customHeader';
 
-type HistoryProps = {};
+type WithdrawProps = {};
 
-const History: React.FC<HistoryProps> = () => {
+const Withdraw: React.FC<WithdrawProps> = () => {
     return (
         <View style={styles.container}>
-           <CustomHeader label={"History"} back={true} />
+          <CustomHeader label={"Withdraw Funds"} back={true} />
         </View>
     );
 };
 
-export default History;
+export default Withdraw;
 
 const styles = StyleSheet.create({
     container: {

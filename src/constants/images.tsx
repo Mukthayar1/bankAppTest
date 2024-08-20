@@ -5,6 +5,7 @@ const filterIcon = require('../assets/images/filter.png');
 const homeIcon = require('../assets/images/home.png')
 const syncIcon = require('../assets/images/sync.png')
 const arrowDownIcon = require('../assets/images/arrow-down.png');
+const arrowLeftIcon = require('../assets/images/arrow-left.png')
 const fundsIcon = require('../assets/images/calander.png')
 
 
@@ -17,5 +18,6 @@ export {
     homeIcon,
     syncIcon,
     arrowDownIcon,
-    fundsIcon
+    fundsIcon,
+    arrowLeftIcon
 }

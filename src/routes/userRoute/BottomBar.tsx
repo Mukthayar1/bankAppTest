@@ -1,11 +1,13 @@
 import React from 'react';
 import { Alert, Animated, StyleSheet, Text, TouchableOpacity, View, Image } from 'react-native';
 import { CurvedBottomBarExpo } from 'react-native-curved-bottom-bar';
+
 import { arrowDownIcon, centerCircle, fundsIcon, homeIcon, syncIcon } from '../../constants/images';
 import { verticalScale } from '../../constants/dynamicSizes';
-import { History, Home } from '../../screens/userScreens';
 import Colors from '../../constants/colors';
 import TextLabel from '../../components/textLabel/textLabel';
+
+import { History, Home, Funds, Withdraw } from '../../screens/userScreens';
 
 const BottomTabs = () => {
 
@@ -53,7 +55,7 @@ const BottomTabs = () => {
             <CurvedBottomBarExpo.Screen
                 name="Funds"
                 position="LEFT"
-                component={() => <Home />}
+                component={() => <Funds />}
             />
             <CurvedBottomBarExpo.Screen
                 name="History"
@@ -62,7 +64,7 @@ const BottomTabs = () => {
             />
             <CurvedBottomBarExpo.Screen
                 name="Withdraw"
-                component={() => <History />}
+                component={() => <Withdraw />}
                 position="RIGHT"
             />
         </CurvedBottomBarExpo.Navigator>
@@ -82,7 +84,7 @@ export const styles = StyleSheet.create({
         shadowRadius: 5,
     },
     bottomBar: {
-        borderRadius:0,
+        borderRadius: 0,
     },
     btnCircleUp: {
         width: verticalScale(50),
