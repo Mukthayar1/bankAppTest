@@ -1,7 +1,6 @@
 import React from 'react';
 import { FlatList, StyleSheet, View } from 'react-native';
-import { useQuery, useQueryClient } from '@tanstack/react-query';
-import { useDispatch } from 'react-redux';
+import { useQuery } from '@tanstack/react-query';
 
 import Colors from '../../../constants/colors';
 import CustomHeader from '../../../components/customHeader/customHeader';
@@ -12,14 +11,10 @@ type FundsProps = {};
 
 const Funds: React.FC<FundsProps> = () => {
 
-    const queryClient = useQueryClient();
-    const dispatch = useDispatch();
-
-
     const { data, isLoading } = useQuery({
         queryKey: ["ads"],
         queryFn: async () => await getMutualFunds()
-    })
+    });
 
     return (
         <View style={styles.container}>

@@ -22,13 +22,20 @@ const Login: React.FC = () => {
     const [email, setEmail] = useState<String>("demo@harvestapp.com");
     const [password, setPassword] = useState<String>("HarvestTest#456");
     const [viewPassword, setViewPassword] = useState<Boolean>(true);
+    const [error, setError] = useState<String>("")
 
-    const { mutateAsync: loginMutation, isError, isSuccess, isPending } = useMutation({
+    const { mutateAsync: loginMutation, isError, isPending } = useMutation({
         mutationFn: async (body: {}) => await loginApi(body),
         onSuccess: (data) => {
-            const decryptData = encryptVal(JSON.stringify(data?.data));
-            dispatch(loginUser(decryptData))
-            queryClient.invalidateQueries({ queryKey: ["loginMutation"] });
+            console.log('data', data.data);
+            if (data?.status == 201 && data.data?.userId) {
+                const decryptData = encryptVal(JSON.stringify(data?.data));
+                dispatch(loginUser(decryptData))
+                queryClient.invalidateQueries({ queryKey: ["loginMutation"] });
+            } else {
+                setError(data.data || "Invalid Credentials")
+            }
+
         },
     })
 
@@ -37,8 +44,11 @@ const Login: React.FC = () => {
             "email": email,
             "password": password
         }
+        setError('')
         await loginMutation(body);
     }
+
+    const isHaveValue = email?.trim()?.length > 0 && password?.trim()?.length > 0
 
     return (
         <View style={styles.container}>
@@ -64,6 +74,10 @@ const Login: React.FC = () => {
                         width={'100%'}
                         SetsecureTextEntry={() => setViewPassword(prevState => !prevState)} />
 
+
+                    {(error || isError) && <TextLabel label={error || "Something went wrong try again"} ResponsiveFonts={ResponsiveFonts.textualStyles.TextInputFonts}
+                        color={Colors.red} textAlign='center' marginTop={10} />}
+
                     <View style={styles.row}>
                         <TextLabel label={"Forgot pin? "} ResponsiveFonts={ResponsiveFonts.textualStyles.TextInputFonts} color={Colors.black} />
                         <TouchableOpacity>
@@ -74,10 +88,10 @@ const Login: React.FC = () => {
                     <CustomButton
                         text={isPending ? "Loading" : "Login"}
                         marginTop={20}
-                        disabled={isPending}
+                        disabled={isPending || !isHaveValue}
                         width='100%'
                         fgColor={Colors.white}
-                        bgColor={!isPending ? Colors.theme : Colors.grey300}
+                        bgColor={!isPending && isHaveValue ? Colors.theme : Colors.grey300}
                         onPress={() => handleCreateAd(email, password)}
                     />
                     <View style={[styles.row, { alignSelf: "center" }]}>
