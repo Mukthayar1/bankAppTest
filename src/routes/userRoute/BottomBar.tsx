@@ -1,24 +1,23 @@
 import React from 'react';
-import { Alert, Animated, StyleSheet, Text, TouchableOpacity, View, Image } from 'react-native';
+import { Alert, Animated, StyleSheet, Text, TouchableOpacity, Image } from 'react-native';
 import { CurvedBottomBarExpo } from 'react-native-curved-bottom-bar';
 
 import { arrowDownIcon, centerCircle, fundsIcon, homeIcon, syncIcon } from '../../constants/images';
 import { verticalScale } from '../../constants/dynamicSizes';
 import Colors from '../../constants/colors';
 import TextLabel from '../../components/textLabel/textLabel';
-
 import { History, Home, Funds, Withdraw } from '../../screens/userScreens';
 
 const BottomTabs = () => {
 
-    const _renderIcon = (routeName, selectedTab) => {
+    const _renderIcon = (routeName: string, selectedTab: String) => {
         const icon = routeName == "Home" ? homeIcon : routeName == "Funds" ? fundsIcon : routeName == "History" ? syncIcon : arrowDownIcon;
         return (
             <Image source={icon} style={routeName == selectedTab ? styles.bottomIconActive : styles.bottomIcon} resizeMode='contain' />
         );
     };
 
-    const renderTabBar = ({ routeName, selectedTab, navigate }) => {
+    const renderTabBar = ({ routeName, selectedTab, navigate }: RenderTabBarProps) => {
         return (
             <TouchableOpacity onPress={() => navigate(routeName)} style={styles.tabbarItem}>
                 {_renderIcon(routeName, selectedTab)}
@@ -72,7 +71,13 @@ const BottomTabs = () => {
 
 export default BottomTabs;
 
-export const styles = StyleSheet.create({
+type RenderTabBarProps = {
+    routeName: string;
+    selectedTab: string;
+    navigate: (routeName: string) => void;
+};
+
+const styles = StyleSheet.create({
     shawdow: {
         shadowColor: '#DDDDDD',
         shadowOffset: {
@@ -83,15 +88,6 @@ export const styles = StyleSheet.create({
         shadowRadius: 5,
     },
     bottomBar: {
-        // shadowColor: "#000",
-        // shadowOffset: {
-        //     width: 0,
-        //     height: 12,
-        // },
-        // shadowOpacity: 0.58,
-        // shadowRadius: 16.00,
-        
-        // elevation: 100
     },
     btnCircleUp: {
         width: verticalScale(50),
@@ -122,3 +118,4 @@ export const styles = StyleSheet.create({
         justifyContent: 'center',
     },
 });
+

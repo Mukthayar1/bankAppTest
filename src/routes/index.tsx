@@ -4,13 +4,11 @@ import { useSelector } from 'react-redux';
 
 import AuthRoutes from './authRoutes';
 import UserRoute from './userRoute';
-
-
+import { RootState } from '../store/Reducer';
 
 const MainRoutes: React.FC = () => {
-    const userDetails = useSelector((state: object) => state?.userReducer?.userDetails);
 
-    console.log('userDetails',userDetails);
+    const userDetails = useSelector((state: RootState) => state?.userReducer?.userDetails);
 
     return (
         <NavigationContainer>

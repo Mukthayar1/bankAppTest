@@ -1,7 +1,6 @@
 import React from 'react';
-import { Text, StyleSheet, TouchableOpacity, Image, ColorValue } from 'react-native';
+import { Text, StyleSheet, TouchableOpacity, Image, ColorValue, ImageBackgroundProps } from 'react-native';
 import Colors from '../../constants/colors';
-// import { ResponsiveFonts } from '../../constants/AppFonts';
 import { verticalScale } from '../../constants/dynamicSizes';
 import { ResponsiveFonts } from '../../constants/appFonts';
 
@@ -53,21 +52,21 @@ const styles = StyleSheet.create({
 
 type Props = {
   code?: string;
-  onPress: () => void,
-  text?: string | null,
-  bgColor?: ColorValue,
-  fgColor?: ColorValue,
-  width?: string,
-  marginTop?: number,
-  Icon?: string | object,
-  marginLeft?: number,
-  borderRadius?: number,
-  height?: number,
-  marginBottom?: number,
-  disabled?: boolean,
+  onPress: () => void;
+  text?: string | null;
+  bgColor?: ColorValue;
+  fgColor?: ColorValue;
+  width?: number | string;
+  marginTop?: number;
+  Icon?: ImageBackgroundProps | object;
+  marginLeft?: number;
+  borderRadius?: number;
+  height?: number;
+  marginBottom?: number;
+  disabled?: boolean;
   ResponsiveFont?: object;
-  borderWidth?: Number,
-  fontSize?: Number
+  borderWidth?: number;
+  fontSize?: number;
 };
 
 export default CustomButton;

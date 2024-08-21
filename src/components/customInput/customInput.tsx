@@ -1,5 +1,5 @@
 import React, { FC, SetStateAction } from 'react'
-import { View, Pressable, TextInput, StyleSheet, Image, ImageSourcePropType } from 'react-native';
+import { View, Pressable, TextInput, StyleSheet, Image, ImageSourcePropType, ColorValue } from 'react-native';
 
 import Colors from '../../constants/colors';
 import { eyeCloseIcon, eyeOpenIcon } from '../../constants/images';
@@ -28,47 +28,48 @@ const CustomInput: FC<Props> = ({
 
 
   return (
-      <View style={[styles.container,
-      width ? { width } : {},
-      ]}>
-        {type == 'ICON' && icon && (
+    <View style={[styles.container,
+    width ? { width } : {},
+    height ? { height } : {},
+    ]}>
+      {type == 'ICON' && icon && (
+        <Image
+          source={icon}
+          style={[
+            styles.img,
+            tintColor ? { tintColor } : { tintColor: Colors.grey500 },
+          ]}
+          resizeMode={'contain'}
+        />
+      )}
+      <TextInput
+        value={value}
+        onChangeText={setValue}
+        placeholder={placeholder}
+        style={[
+          styles.input,
+          color ? { color } : { color: Colors.black },
+          // height ? { height } : {}, { ...ResponsiveFonts.textualStyles.TextInputFonts },
+          widthinput && { width: widthinput },
+          icon ? { marginLeft: 10 } : {},
+        ]}
+        secureTextEntry={secureTextEntry}
+        keyboardType={keybord ? keybord : 'default'}
+        placeholderTextColor={Colors.grey500}
+        multiline={multiline}
+        numberOfLines={numberOfLines}
+        editable={editable}
+      />
+      {secure == true && (
+        <Pressable onPress={() => SetsecureTextEntry(!secureTextEntry)}>
           <Image
-            source={icon}
-            style={[
-              styles.img,
-              tintColor ? { tintColor } : { tintColor: Colors.grey500 },
-            ]}
+            source={secureTextEntry != true ? eyeOpenIcon : eyeCloseIcon}
+            style={[styles.img2]}
             resizeMode={'contain'}
           />
-        )}
-        <TextInput
-          value={value}
-          onChangeText={setValue}
-          placeholder={placeholder}
-          style={[
-            styles.input,
-            color ? { color } : { color: Colors.black },
-            height ? { height } : {}, { ...ResponsiveFonts.textualStyles.TextInputFonts },
-            widthinput && { width: widthinput },
-            icon ? { marginLeft: 10 } : {},
-          ]}
-          secureTextEntry={secureTextEntry}
-          keyboardType={keybord ? keybord : 'default'}
-          placeholderTextColor={Colors.grey500}
-          multiline={multiline}
-          numberOfLines={numberOfLines}
-          editable={editable}
-        />
-        {secure == true && (
-          <Pressable onPress={() => SetsecureTextEntry(!secureTextEntry)}>
-            <Image
-              source={secureTextEntry != true ? eyeOpenIcon : eyeCloseIcon}
-              style={[styles.img2]}
-              resizeMode={'contain'}
-            />
-          </Pressable>
-        )}
-      </View>
+        </Pressable>
+      )}
+    </View>
   );
 };
 
@@ -108,27 +109,28 @@ const styles = StyleSheet.create({
   },
 });
 
+
 type Props = {
-  value?: String | null;
+  value?: string | null;
   setValue?: SetStateAction<any>;
-  placeholder?: String | null;
-  secureTextEntry?: Boolean;
-  keybord?: String;
-  multiline?: Boolean;
-  numberOfLines?: Number;
+  placeholder?: string | null;
+  secureTextEntry?: boolean;
+  keybord?: string;
+  multiline?: boolean;
+  numberOfLines?: number;
   icon?: ImageSourcePropType;
-  type?: String;
+  type?: string;
   SetsecureTextEntry?: SetStateAction<any>;
-  secure?: Boolean;
-  width?: Number | String;
-  tintColor?: String;
-  borderWidth?: Number | String;
-  borderColor?: String;
-  color?: String;
-  height?: Number | String;
-  Label?: String | null;
-  widthinput?: Number | String;
-  editable?: Boolean
-}
+  secure?: boolean;
+  width?: number | string;
+  tintColor?: ColorValue;
+  borderWidth?: number | string;
+  borderColor?: ColorValue;
+  color?: ColorValue;
+  height?: number | string;
+  Label?: string | null;
+  widthinput?: number | string;
+  editable?: boolean;
+};
 
 export default CustomInput;

@@ -10,7 +10,7 @@ import { ResponsiveFonts } from '../../../constants/appFonts';
 import TextLabel from '../../../components/textLabel/textLabel';
 import { moderateScale, verticalScale } from '../../../constants/dynamicSizes';
 import CustomInput from '../../../components/customInput/customInput';
-import { arrowDownIcon, filterIcon, searchIcon } from '../../../constants/images';
+import { arrowDownIcon3, filterIcon, searchIcon } from '../../../constants/images';
 
 type FundsProps = {};
 
@@ -26,6 +26,8 @@ const Funds: React.FC<FundsProps> = () => {
     return (
         <View style={styles.container}>
             <CustomHeader label={"Mutual Funds"} back={true} />
+
+
             <View style={styles.searchRow}>
                 <CustomInput
                     type={'ICON'}
@@ -34,12 +36,14 @@ const Funds: React.FC<FundsProps> = () => {
                     keybord={'email-address'}
                     setValue={setSearchValue}
                     icon={searchIcon}
+                    height={55}
                     width={'65%'} />
                 <TouchableOpacity style={styles.row}>
                     <Image source={filterIcon} resizeMode='contain' style={styles.icon} />
-                    <Image source={arrowDownIcon} resizeMode='contain' style={styles.icon} />
+                    <Image source={arrowDownIcon3} resizeMode='contain' style={styles.icon} />
                 </TouchableOpacity>
             </View>
+
             <FlatList
                 ListHeaderComponent={() => {
                     return (
@@ -52,10 +56,11 @@ const Funds: React.FC<FundsProps> = () => {
                     )
                 }}
                 data={data?.data}
-                renderItem={FundItem}
+                renderItem={({ item }) => <FundItem item={item} />}
                 keyExtractor={item => item.id.toString()}
                 ListFooterComponent={() => <View style={styles.handlingBottomTabHeight} />}
             />
+
         </View>
     );
 };
@@ -87,7 +92,7 @@ const styles = StyleSheet.create({
         justifyContent: "space-between",
         alignItems: "center",
         width: "25%",
-        height: verticalScale(65),
+        height: verticalScale(55),
         borderRadius: 10,
         paddingHorizontal: 10,
         marginVertical: 5,

@@ -8,7 +8,8 @@ const arrowDownIcon = require('../assets/images/arrow-down.png');
 const arrowLeftIcon = require('../assets/images/arrow-left.png');
 const arrowUpIcon =require('../assets/images/arrow-up.png');
 const fundsIcon = require('../assets/images/calander.png');
-const searchIcon = require('../assets/images/search.png')
+const searchIcon = require('../assets/images/search.png');
+const arrowDownIcon3 = require('../assets/images/arrow-down-2.png')
 
 
 
@@ -23,5 +24,6 @@ export {
     fundsIcon,
     arrowLeftIcon,
     arrowUpIcon,
-    searchIcon
+    searchIcon,
+    arrowDownIcon3   
 }

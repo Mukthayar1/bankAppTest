@@ -1,15 +1,13 @@
 import React from 'react';
-import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { Image, StyleSheet, TouchableOpacity, View } from 'react-native';
+
 import Colors from '../../../constants/colors';
-import CustomHeader from '../../../components/customHeader/customHeader';
 import { moderateScale, verticalScale } from '../../../constants/dynamicSizes';
 import { ResponsiveFonts } from '../../../constants/appFonts';
 import TextLabel from '../../../components/textLabel/textLabel';
 import { arrowDownIcon, arrowUpIcon } from '../../../constants/images';
 
-type FundItem = {};
-
-const FundItem: React.FC<FundItem> = ({ item }) => {
+const FundItem: React.FC<FundItemProps> = ({ item }) => {
 
     return (
         <View style={styles.card}>
@@ -134,3 +132,12 @@ const styles = StyleSheet.create({
         width: moderateScale(10)
     }
 });
+
+type FundItemProps = {
+    item: {
+        id: string;
+        name: string;
+        last_year_return: number;
+    };
+};
+
